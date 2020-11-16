@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+  <div>
+    <form action="/login.html" method="post">
+      <label for="username">
+        Username:
+        <input type="text" name="username" id="username" />
+      </label>
+      <br>
+      <label for="password">
+        Password:
+        <input type="password" name="password" id="password" />
+      </label>
+      <br>
+      <button type="button" id="login-btn">Login</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+</body>
+<script>
+  $(document).ready(function () {
+    const loginBtn = $('#login-btn')
+    loginBtn.click(function () {
+      // 获取cookie中的_csrf参数的值
+      const _csrf = $.cookie('XSRF-TOKEN')
+      console.log('Cookie中的XSRF-TOKEN', _csrf)
+      // username
+      let username = $('#username').val()
+      let password = $('#password').val()
+      $.post('/login.html', {
+        username,
+        password,
+        _csrf
+      }, function (res) {
+        console.log('登录后的响应：', res)
+      })
+    })
+  })
+</script>
+</html>

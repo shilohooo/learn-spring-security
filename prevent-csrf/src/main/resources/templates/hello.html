@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <title>hello</title>
+</head>
+<body>
+  <div>
+    <form action="/hello" method="post">
+      <!--
+        注意，在发送 POST 请求的时候，还额外携带了一个隐藏域，隐藏域的 key 是 ${_csrf.parameterName}，value 则是 ${_csrf.token}。
+        这两个值服务端会自动带过来，我们只需要在前端渲染出来即可。
+        SpringSecurity配置记得不要禁用默认的CSRF防御,
+        这是 Spring Security 中默认的方案，通过 Model 将相关的数据带到前端来。
+      -->
+      <input type="hidden" th:value="${_csrf.token}" th:name="${_csrf.parameterName}" />
+      <input type="submit" value="say Hello" />
+    </form>
+  </div>
+</body>
+</html>

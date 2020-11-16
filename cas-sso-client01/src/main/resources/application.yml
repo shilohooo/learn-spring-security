@@ -1,0 +1,35 @@
+# cas配置
+cas:
+  # cas单点登录服务器信息
+  server:
+    prefix: https://cas.shiloh.org:8443/cas
+    login-url: ${cas.server.prefix}/login
+    logout-url: ${cas.server.prefix}/logout
+  # cas客户端信息配置
+  client:
+    prefix: http://client1.cas.shiloh.org:8100
+    login-url: ${cas.client.prefix}/login/cas
+    logout-relative-url: /logout/cas
+    logout-url: ${cas.client.prefix}${cas.client.logout-relative-url}
+
+server:
+  port: 8100
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:13306/cas_sso_persistent_user_data?useUnicode=true&serverTimezone=Asia/Shanghai&autoReconnect=true&useSSL=false&characterEncoding=UTF-8
+    username: root
+    password: Qt123456@
+  jpa:
+    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL57Dialect
+    database: mysql
+    open-in-view: true

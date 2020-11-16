@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录</title>
+</head>
+<body>
+  <div>
+    <button type="button" id="login-btn">
+      登录
+    </button>
+    <br>
+    <h1 id="response-text-box"></h1>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+</body>
+<script>
+  $(document).ready(function () {
+    $('#login-btn').click(function () {
+      const responseTextBox = $('#response-text-box')
+      $.ajax({
+        url: 'do-login',
+        type: 'post',
+        contentType: 'application/json;charset=UTF-8',
+        data: JSON.stringify({
+          username: 'admin',
+          password: 'admin'
+        }),
+        success: function (res) {
+          console.log(res)
+          responseTextBox.text(JSON.stringify(res))
+        },
+        error: function (error) {
+          console.log(error)
+          responseTextBox.text(JSON.stringify(error))
+        }
+      })
+    })
+  })
+</script>
+</html>

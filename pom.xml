@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.shiloh</groupId>
+  <artifactId>springboot-spring-security-examples</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>springboot-spring-security-examples</name>
+  <description>Spring Boot整合SpringSecurity案例集</description>
+<!--  maven父工程打包类型必须为POM-->
+  <packaging>pom</packaging>
+
+<!--  包含的子模块-->
+  <modules>
+<!--    入门-->
+    <module>quick-start</module>
+<!--    自定义表单登录-->
+    <module>form-login</module>
+<!--    前后端分离，使用JSON数据交互完成登录认证-->
+    <module>fe-and-be-separate</module>
+<!--    简单的授权案例-->
+    <module>authorize</module>
+<!--    SpringBoot整合SpringSecurity案例5：持久化用户数据-->
+    <module>persistent-user-data</module>
+<!--    SpringBoot整合SpringSecurity案例6：集成SpringDataJpa-->
+    <module>integration-spring-data-jpa</module>
+<!--    SpringBoot整合SpringSecurity案例7：自动登录-->
+    <module>automatic-login</module>
+<!--    SpringBoot整合SpringSecurity案例8：自定义认证逻辑的2种高级方式-->
+    <module>customize-advanced-authentication-logic</module>
+<!--    Spring Boot整合SpringSecurity案例9：踢掉前一个登录用户-->
+    <module>only-one-login-on-same-device</module>
+<!--    SpringBoot整合SpringSecurity案例10：前后端分离项目中处理一台设备同一用户只许登录一次的场景-->
+    <module>only-one-login-in-fe-and-be-separate</module>
+<!--    Springboot整合SpringSecurity案例11：预防会话固定攻击配置-->
+    <module>prevent-session-fixation-attacks</module>
+<!--    SpringBoot整合SpringSecurity案例12：集群化部署中处理session共享问题-->
+    <module>session-sharing-in-cluster</module>
+<!--    SpringBoot整合SpringSecurity案例13：预防CSRF（跨域请求伪造）攻击-->
+    <module>prevent-csrf</module>
+<!--    SpringBoot整合SpringSecurity案例14：cas单点登录客户端-->
+    <module>cas-sso-client01</module>
+<!--    SpringBoot整合SpringSecurity案例15：Swagger测试接口带上token之授权服务器模块-->
+    <module>swagger-token-auth-server</module>
+<!--    SpringBoot整合SpringSecurity案例16：Swagger测试接口带上token之资源服务器模块-->
+    <module>swagger-token-user-server</module>
+<!--    SpringBoot整合SpringSecurity案例17：Http Basic认证-->
+    <module>http-basic-authentication</module>
+<!--    SpringBoot整合SpringSecurity案例18：4种权限控制的方式-->
+    <module>4ways-of-access-control</module>
+<!--    SpringBoot整合SpringSecurity案例19：多种密码加密器共存，适用于整合旧系统-->
+    <module>multiple-encryptors-work-together</module>
+<!--    SpringBoot整合SpringSecurity案例20: 自定义异常处理-->
+    <module>customize-exception-handle</module>
+<!--    SpringBoot整合SpringSecurity案例21: 同时对接多种用户数据源-->
+    <module>multiple-user-data-support</module>
+<!--    SpringBoot整合SpringSecurity案例22：让上级拥有下级角色的所有权限，针对 SpringSecurity v5.0.11之后的版本-->
+    <module>get-sub-role-permission</module>
+  </modules>
+
+<!-- 全局属性 & 依赖版本统一配置 -->
+  <properties>
+    <java.version>1.8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compile.encoding>UTF-8</maven.compile.encoding>
+    <project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
+    <spring.boot.dependencies.version>2.2.6.RELEASE</spring.boot.dependencies.version>
+    <spring.cloud.dependencies.version>Hoxton.SR3</spring.cloud.dependencies.version>
+    <spring.security.test.version>5.1.6.RELEASE</spring.security.test.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <easy.captcha.version>1.6.2</easy.captcha.version>
+    <spring.security.cas.version>5.1.6.RELEASE</spring.security.cas.version>
+    <springfox.swagger2.version>2.9.2</springfox.swagger2.version>
+    <springfox.swagger.ui.version>2.9.2</springfox.swagger.ui.version>
+  </properties>
+
+<!--  管理第三方依赖版本号-->
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.boot.dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring.cloud.dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-test</artifactId>
+        <version>${spring.security.test.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-cas</artifactId>
+        <version>${spring.security.cas.version}</version>
+      </dependency>
+
+<!--      验证码生成，校验工具：https://gitee.com/whvse/EasyCaptcha?_from=gitee_search -->
+      <dependency>
+        <groupId>com.github.whvcse</groupId>
+        <artifactId>easy-captcha</artifactId>
+        <version>${easy.captcha.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger2</artifactId>
+        <version>${springfox.swagger2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger-ui</artifactId>
+        <version>${springfox.swagger.ui.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+<!--  导入子项目通用依赖-->
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+  </dependencies>
+</project>
+
